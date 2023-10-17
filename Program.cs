@@ -12,6 +12,9 @@ namespace RB3DX_Launcher
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
             Application.Run(new Form1());
+            Logger.LogInfo("Checking for the latest update...");
+
+            // (TODO:Ash) Finish off writing the launcher version checker + Deluxe updater.
         }
     }
 }
