@@ -74,11 +74,20 @@ namespace RB3DX_Launcher
             string rpcs3ExecutablePath = RPCS3Path.Text;
             string gamePath = devhdd0.Text + "/game/BLUS30463/USRDIR/EBOOT.bin";
 
-            Process.Start(new ProcessStartInfo(rpcs3ExecutablePath)
+            try
             {
-                Arguments = "--no-gui " + "\"" + gamePath + "\"",
-                UseShellExecute = true
-            });
+                Process.Start(new ProcessStartInfo(rpcs3ExecutablePath)
+                {
+                    Arguments = "--no-gui " + "\"" + gamePath + "\"",
+                    UseShellExecute = true
+                });
+                Logger.LogInfo("Found the EBOOT.bin, Booting the game!");
+            }
+            catch
+            {
+                MessageBox.Show(Text = "Failed to launch. Couldn't find the EBOOT.bin.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Logger.LogError("Couldn't find the EBOOT.bin, Does the game exist in that directory?");
+            }
         }
 
         private void UpdateButton_Click(object sender, EventArgs e)
