@@ -71,5 +71,13 @@ namespace RB3DX_Launcher
                 UseShellExecute = true
             });
         }
+
+        private void UpdateButton_Click(object sender, EventArgs e)
+        {
+            // show updater form
+            Updater updater = new Updater();
+            updater.ShowDialog();
+
+        }
     }
 }

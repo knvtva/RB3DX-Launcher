@@ -31,8 +31,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             NoLongerAHomie = new TabControl();
             tabPage1 = new TabPage();
-            label1 = new Label();
-            comboBox1 = new ComboBox();
+            pictureBox1 = new PictureBox();
             listBox1 = new ListBox();
             play = new Button();
             dxLogo = new PictureBox();
@@ -45,12 +44,12 @@
             RPCS3Path = new TextBox();
             folderBrowserDialog1 = new FolderBrowserDialog();
             openFileDialog1 = new OpenFileDialog();
-            pictureBox1 = new PictureBox();
+            UpdateButton = new Button();
             NoLongerAHomie.SuspendLayout();
             tabPage1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dxLogo).BeginInit();
             tabPage2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
             // NoLongerAHomie
@@ -68,9 +67,8 @@
             tabPage1.BackColor = Color.FromArgb(1, 13, 25);
             tabPage1.BackgroundImage = Properties.Resources.headerbg;
             tabPage1.BackgroundImageLayout = ImageLayout.Center;
+            tabPage1.Controls.Add(UpdateButton);
             tabPage1.Controls.Add(pictureBox1);
-            tabPage1.Controls.Add(label1);
-            tabPage1.Controls.Add(comboBox1);
             tabPage1.Controls.Add(listBox1);
             tabPage1.Controls.Add(play);
             tabPage1.Controls.Add(dxLogo);
@@ -81,26 +79,16 @@
             tabPage1.TabIndex = 0;
             tabPage1.Text = "Home";
             // 
-            // label1
+            // pictureBox1
             // 
-            label1.AutoSize = true;
-            label1.BackColor = Color.Transparent;
-            label1.ForeColor = SystemColors.ControlLightLight;
-            label1.Location = new Point(604, 296);
-            label1.Name = "label1";
-            label1.Size = new Size(87, 15);
-            label1.TabIndex = 4;
-            label1.Text = "Choose Branch";
-            // 
-            // comboBox1
-            // 
-            comboBox1.AllowDrop = true;
-            comboBox1.FormattingEnabled = true;
-            comboBox1.Location = new Point(604, 314);
-            comboBox1.Name = "comboBox1";
-            comboBox1.Size = new Size(121, 23);
-            comboBox1.TabIndex = 3;
-            comboBox1.Text = "main";
+            pictureBox1.BackgroundImageLayout = ImageLayout.Stretch;
+            pictureBox1.Image = Properties.Resources.milohax;
+            pictureBox1.Location = new Point(9, 6);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new Size(100, 19);
+            pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
+            pictureBox1.TabIndex = 5;
+            pictureBox1.TabStop = false;
             // 
             // listBox1
             // 
@@ -220,16 +208,15 @@
             // 
             openFileDialog1.FileName = "openFileDialog1";
             // 
-            // pictureBox1
+            // UpdateButton
             // 
-            pictureBox1.BackgroundImageLayout = ImageLayout.Stretch;
-            pictureBox1.Image = Properties.Resources.milohax;
-            pictureBox1.Location = new Point(9, 6);
-            pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(100, 19);
-            pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
-            pictureBox1.TabIndex = 5;
-            pictureBox1.TabStop = false;
+            UpdateButton.Location = new Point(604, 314);
+            UpdateButton.Name = "UpdateButton";
+            UpdateButton.Size = new Size(109, 23);
+            UpdateButton.TabIndex = 6;
+            UpdateButton.Text = "Update RB3DX";
+            UpdateButton.UseVisualStyleBackColor = true;
+            UpdateButton.Click += UpdateButton_Click;
             // 
             // Form1
             // 
@@ -243,11 +230,10 @@
             Text = "Rock Band 3 Deluxe Launcher";
             NoLongerAHomie.ResumeLayout(false);
             tabPage1.ResumeLayout(false);
-            tabPage1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ((System.ComponentModel.ISupportInitialize)dxLogo).EndInit();
             tabPage2.ResumeLayout(false);
             tabPage2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
         }
 
@@ -259,8 +245,6 @@
         private PictureBox dxLogo;
         private Button play;
         private ListBox listBox1;
-        private ComboBox comboBox1;
-        private Label label1;
         private TextBox RPCS3Path;
         private FolderBrowserDialog folderBrowserDialog1;
         private Label label2;
@@ -270,5 +254,6 @@
         private Label label3;
         private TextBox devhdd0;
         private PictureBox pictureBox1;
+        private Button UpdateButton;
     }
 }
