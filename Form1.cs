@@ -8,17 +8,6 @@ namespace RB3DX_Launcher
         {
             InitializeComponent();
         }
-
-        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void contextMenuStrip1_Opening(object sender, System.ComponentModel.CancelEventArgs e)
-        {
-
-        }
-
         private void dxLogo_Click(object sender, EventArgs e)
         {
             Process.Start(new ProcessStartInfo("https://rb3dx.neocities.org/") { UseShellExecute = true });

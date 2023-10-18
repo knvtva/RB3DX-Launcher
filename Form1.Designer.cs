@@ -31,12 +31,12 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             NoLongerAHomie = new TabControl();
             tabPage1 = new TabPage();
+            label1 = new Label();
             comboBox1 = new ComboBox();
             listBox1 = new ListBox();
             play = new Button();
             dxLogo = new PictureBox();
             tabPage2 = new TabPage();
-            label1 = new Label();
             NoLongerAHomie.SuspendLayout();
             tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dxLogo).BeginInit();
@@ -54,7 +54,7 @@
             // 
             // tabPage1
             // 
-            tabPage1.BackColor = Color.DimGray;
+            tabPage1.BackColor = Color.FromArgb(1, 13, 25);
             tabPage1.BackgroundImage = Properties.Resources.headerbg;
             tabPage1.BackgroundImageLayout = ImageLayout.Center;
             tabPage1.Controls.Add(label1);
@@ -69,6 +69,17 @@
             tabPage1.TabIndex = 0;
             tabPage1.Text = "Home";
             // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.BackColor = Color.Transparent;
+            label1.ForeColor = SystemColors.ControlLightLight;
+            label1.Location = new Point(604, 296);
+            label1.Name = "label1";
+            label1.Size = new Size(87, 15);
+            label1.TabIndex = 4;
+            label1.Text = "Choose Branch";
+            // 
             // comboBox1
             // 
             comboBox1.AllowDrop = true;
@@ -81,6 +92,7 @@
             // 
             // listBox1
             // 
+            listBox1.BackColor = SystemColors.Control;
             listBox1.FormattingEnabled = true;
             listBox1.HorizontalScrollbar = true;
             listBox1.ItemHeight = 15;
@@ -120,24 +132,14 @@
             // 
             // tabPage2
             // 
+            tabPage2.BackColor = Color.DimGray;
+            tabPage2.BackgroundImage = Properties.Resources.headerbg;
             tabPage2.Location = new Point(4, 24);
             tabPage2.Name = "tabPage2";
             tabPage2.Padding = new Padding(3);
             tabPage2.Size = new Size(794, 423);
             tabPage2.TabIndex = 1;
             tabPage2.Text = "Settings";
-            tabPage2.UseVisualStyleBackColor = true;
-            // 
-            // label1
-            // 
-            label1.AutoSize = true;
-            label1.BackColor = Color.Transparent;
-            label1.ForeColor = SystemColors.ControlLightLight;
-            label1.Location = new Point(604, 296);
-            label1.Name = "label1";
-            label1.Size = new Size(87, 15);
-            label1.TabIndex = 4;
-            label1.Text = "Choose Branch";
             // 
             // Form1
             // 
