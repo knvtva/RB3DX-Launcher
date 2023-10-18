@@ -16,5 +16,9 @@ namespace RB3DX_Launcher
 
             // (TODO:Ash) Finish off writing the launcher version checker + Deluxe updater.
         }
+        public static void ConfigWriter(string LineToWrite)
+        {
+            //TODO: Write the config writer. (This will be used to write the RPCS3 path to the config file.)
+        }
     }
 }

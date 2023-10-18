@@ -132,6 +132,12 @@
   <data name="listBox1.Items4" xml:space="preserve">
     <value>Sed velit dignissim sodales ut eu sem integer vitae. Sed odio morbi quis commodo odio aenean sed adipiscing diam. Eget duis at tellus at urna condimentum. Varius duis at consectetur lorem donec massa sapien faucibus et. Sed enim ut sem viverra aliquet. Pellentesque diam volutpat commodo sed egestas egestas fringilla phasellus. In nibh mauris cursus mattis molestie a iaculis at erat. Lectus arcu bibendum at varius vel pharetra vel turpis nunc. Eleifend quam adipiscing vitae proin sagittis nisl rhoncus. Purus semper eget duis at tellus at urna. Phasellus vestibulum lorem sed risus ultricies tristique nulla aliquet. Augue eget arcu dictum varius duis at consectetur lorem.</value>
   </data>
+  <metadata name="folderBrowserDialog1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
+  </metadata>
+  <metadata name="openFileDialog1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>184, 17</value>
+  </metadata>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>

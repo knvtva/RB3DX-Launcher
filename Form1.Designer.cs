@@ -37,9 +37,20 @@
             play = new Button();
             dxLogo = new PictureBox();
             tabPage2 = new TabPage();
+            BrowseDevHDD0 = new Button();
+            label3 = new Label();
+            devhdd0 = new TextBox();
+            BrowseRPCS3 = new Button();
+            label2 = new Label();
+            RPCS3Path = new TextBox();
+            folderBrowserDialog1 = new FolderBrowserDialog();
+            openFileDialog1 = new OpenFileDialog();
+            pictureBox1 = new PictureBox();
             NoLongerAHomie.SuspendLayout();
             tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dxLogo).BeginInit();
+            tabPage2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
             // NoLongerAHomie
@@ -57,6 +68,7 @@
             tabPage1.BackColor = Color.FromArgb(1, 13, 25);
             tabPage1.BackgroundImage = Properties.Resources.headerbg;
             tabPage1.BackgroundImageLayout = ImageLayout.Center;
+            tabPage1.Controls.Add(pictureBox1);
             tabPage1.Controls.Add(label1);
             tabPage1.Controls.Add(comboBox1);
             tabPage1.Controls.Add(listBox1);
@@ -112,6 +124,7 @@
             play.TabIndex = 1;
             play.Text = "Play!";
             play.UseVisualStyleBackColor = true;
+            play.Click += play_Click;
             // 
             // dxLogo
             // 
@@ -132,14 +145,91 @@
             // 
             // tabPage2
             // 
-            tabPage2.BackColor = Color.DimGray;
+            tabPage2.BackColor = Color.FromArgb(1, 13, 25);
             tabPage2.BackgroundImage = Properties.Resources.headerbg;
+            tabPage2.Controls.Add(BrowseDevHDD0);
+            tabPage2.Controls.Add(label3);
+            tabPage2.Controls.Add(devhdd0);
+            tabPage2.Controls.Add(BrowseRPCS3);
+            tabPage2.Controls.Add(label2);
+            tabPage2.Controls.Add(RPCS3Path);
             tabPage2.Location = new Point(4, 24);
             tabPage2.Name = "tabPage2";
             tabPage2.Padding = new Padding(3);
             tabPage2.Size = new Size(794, 423);
             tabPage2.TabIndex = 1;
             tabPage2.Text = "Settings";
+            // 
+            // BrowseDevHDD0
+            // 
+            BrowseDevHDD0.Location = new Point(305, 123);
+            BrowseDevHDD0.Name = "BrowseDevHDD0";
+            BrowseDevHDD0.Size = new Size(75, 23);
+            BrowseDevHDD0.TabIndex = 5;
+            BrowseDevHDD0.Text = "Browse";
+            BrowseDevHDD0.UseVisualStyleBackColor = true;
+            BrowseDevHDD0.Click += BrowseDevHDD0_Click;
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.ForeColor = SystemColors.Control;
+            label3.Location = new Point(23, 105);
+            label3.Name = "label3";
+            label3.Size = new Size(58, 15);
+            label3.TabIndex = 4;
+            label3.Text = "dev_hdd0";
+            // 
+            // devhdd0
+            // 
+            devhdd0.Location = new Point(23, 123);
+            devhdd0.Name = "devhdd0";
+            devhdd0.ReadOnly = true;
+            devhdd0.Size = new Size(276, 23);
+            devhdd0.TabIndex = 3;
+            // 
+            // BrowseRPCS3
+            // 
+            BrowseRPCS3.Location = new Point(305, 56);
+            BrowseRPCS3.Name = "BrowseRPCS3";
+            BrowseRPCS3.Size = new Size(75, 23);
+            BrowseRPCS3.TabIndex = 2;
+            BrowseRPCS3.Text = "Browse";
+            BrowseRPCS3.UseVisualStyleBackColor = true;
+            BrowseRPCS3.Click += BrowseRPCS3_Click;
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.ForeColor = SystemColors.Control;
+            label2.Location = new Point(23, 38);
+            label2.Name = "label2";
+            label2.Size = new Size(62, 15);
+            label2.TabIndex = 1;
+            label2.Text = "RPCS3.exe";
+            // 
+            // RPCS3Path
+            // 
+            RPCS3Path.Location = new Point(23, 56);
+            RPCS3Path.Name = "RPCS3Path";
+            RPCS3Path.ReadOnly = true;
+            RPCS3Path.Size = new Size(276, 23);
+            RPCS3Path.TabIndex = 0;
+            // 
+            // openFileDialog1
+            // 
+            openFileDialog1.FileName = "openFileDialog1";
+            // 
+            // pictureBox1
+            // 
+            pictureBox1.BackgroundImageLayout = ImageLayout.Stretch;
+            pictureBox1.Image = Properties.Resources.milohax;
+            pictureBox1.Location = new Point(9, 6);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new Size(100, 19);
+            pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
+            pictureBox1.TabIndex = 5;
+            pictureBox1.TabStop = false;
             // 
             // Form1
             // 
@@ -155,6 +245,9 @@
             tabPage1.ResumeLayout(false);
             tabPage1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)dxLogo).EndInit();
+            tabPage2.ResumeLayout(false);
+            tabPage2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
         }
 
@@ -168,5 +261,14 @@
         private ListBox listBox1;
         private ComboBox comboBox1;
         private Label label1;
+        private TextBox RPCS3Path;
+        private FolderBrowserDialog folderBrowserDialog1;
+        private Label label2;
+        private Button BrowseRPCS3;
+        private OpenFileDialog openFileDialog1;
+        private Button BrowseDevHDD0;
+        private Label label3;
+        private TextBox devhdd0;
+        private PictureBox pictureBox1;
     }
 }
