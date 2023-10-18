@@ -31,10 +31,12 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             NoLongerAHomie = new TabControl();
             tabPage1 = new TabPage();
+            comboBox1 = new ComboBox();
             listBox1 = new ListBox();
             play = new Button();
             dxLogo = new PictureBox();
             tabPage2 = new TabPage();
+            label1 = new Label();
             NoLongerAHomie.SuspendLayout();
             tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dxLogo).BeginInit();
@@ -52,6 +54,11 @@
             // 
             // tabPage1
             // 
+            tabPage1.BackColor = Color.DimGray;
+            tabPage1.BackgroundImage = Properties.Resources.headerbg;
+            tabPage1.BackgroundImageLayout = ImageLayout.Center;
+            tabPage1.Controls.Add(label1);
+            tabPage1.Controls.Add(comboBox1);
             tabPage1.Controls.Add(listBox1);
             tabPage1.Controls.Add(play);
             tabPage1.Controls.Add(dxLogo);
@@ -61,7 +68,16 @@
             tabPage1.Size = new Size(794, 423);
             tabPage1.TabIndex = 0;
             tabPage1.Text = "Home";
-            tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // comboBox1
+            // 
+            comboBox1.AllowDrop = true;
+            comboBox1.FormattingEnabled = true;
+            comboBox1.Location = new Point(604, 314);
+            comboBox1.Name = "comboBox1";
+            comboBox1.Size = new Size(121, 23);
+            comboBox1.TabIndex = 3;
+            comboBox1.Text = "main";
             // 
             // listBox1
             // 
@@ -87,6 +103,7 @@
             // 
             // dxLogo
             // 
+            dxLogo.BackColor = Color.Transparent;
             dxLogo.BackgroundImageLayout = ImageLayout.Stretch;
             dxLogo.ErrorImage = null;
             dxLogo.Image = Properties.Resources.logo;
@@ -99,6 +116,7 @@
             dxLogo.TabIndex = 0;
             dxLogo.TabStop = false;
             dxLogo.UseWaitCursor = true;
+            dxLogo.Click += dxLogo_Click;
             // 
             // tabPage2
             // 
@@ -109,6 +127,17 @@
             tabPage2.TabIndex = 1;
             tabPage2.Text = "Settings";
             tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.BackColor = Color.Transparent;
+            label1.ForeColor = SystemColors.ControlLightLight;
+            label1.Location = new Point(604, 296);
+            label1.Name = "label1";
+            label1.Size = new Size(87, 15);
+            label1.TabIndex = 4;
+            label1.Text = "Choose Branch";
             // 
             // Form1
             // 
@@ -122,6 +151,7 @@
             Text = "Rock Band 3 Deluxe Launcher";
             NoLongerAHomie.ResumeLayout(false);
             tabPage1.ResumeLayout(false);
+            tabPage1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)dxLogo).EndInit();
             ResumeLayout(false);
         }
@@ -134,5 +164,7 @@
         private PictureBox dxLogo;
         private Button play;
         private ListBox listBox1;
+        private ComboBox comboBox1;
+        private Label label1;
     }
 }
