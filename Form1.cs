@@ -8,6 +8,14 @@ namespace RB3DX_Launcher
         public Form1()
         {
             InitializeComponent();
+            // read config file and populate rpcs3path and devhdd0 path
+            string configPath = "RB3DX.config";
+            if (System.IO.File.Exists(configPath))
+            {
+                string[] configLines = System.IO.File.ReadAllLines(configPath);
+                RPCS3Path.Text = configLines[0];
+                devhdd0.Text = configLines[1];
+            }   
         }
         private void dxLogo_Click(object sender, EventArgs e)
         {
@@ -77,6 +85,17 @@ namespace RB3DX_Launcher
             // show updater form
             Updater updater = new Updater();
             updater.ShowDialog();
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            // write a config file for the launcher with dev hdd0 path and rpcs3 path
+            string rpcs3ExecutablePath = RPCS3Path.Text;
+            string hddPath = devhdd0.Text;
+            string configPath = "RB3DX.config";
+            string[] configLines = { rpcs3ExecutablePath, hddPath };
+            File.WriteAllLines(configPath, configLines);
 
         }
     }
