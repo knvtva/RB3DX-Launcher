@@ -15,7 +15,8 @@ namespace RB3DX_Launcher
                 string[] configLines = System.IO.File.ReadAllLines(configPath);
                 RPCS3Path.Text = configLines[0];
                 devhdd0.Text = configLines[1];
-            }   
+                comboBox1.Text = configLines[2];
+            }
         }
         private void dxLogo_Click(object sender, EventArgs e)
         {
@@ -94,9 +95,20 @@ namespace RB3DX_Launcher
             string rpcs3ExecutablePath = RPCS3Path.Text;
             string hddPath = devhdd0.Text;
             string configPath = "RB3DX.config";
-            string[] configLines = { rpcs3ExecutablePath, hddPath };
+            string branch = comboBox1.Text;
+            string[] configLines = { rpcs3ExecutablePath, hddPath, branch };
             File.WriteAllLines(configPath, configLines);
 
+        }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string rpcs3ExecutablePath = RPCS3Path.Text;
+            string hddPath = devhdd0.Text;
+            string configPath = "RB3DX.config";
+            string branch = comboBox1.Text;
+            string[] configLines = { rpcs3ExecutablePath, hddPath, branch };
+            File.WriteAllLines(configPath, configLines);
         }
     }
 }

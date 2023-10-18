@@ -39,6 +39,7 @@
             play = new Button();
             dxLogo = new PictureBox();
             tabPage2 = new TabPage();
+            button1 = new Button();
             BrowseDevHDD0 = new Button();
             label3 = new Label();
             devhdd0 = new TextBox();
@@ -47,7 +48,6 @@
             RPCS3Path = new TextBox();
             folderBrowserDialog1 = new FolderBrowserDialog();
             openFileDialog1 = new OpenFileDialog();
-            button1 = new Button();
             NoLongerAHomie.SuspendLayout();
             tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
@@ -105,6 +105,7 @@
             comboBox1.Size = new Size(182, 33);
             comboBox1.TabIndex = 7;
             comboBox1.Text = "main";
+            comboBox1.SelectedIndexChanged += comboBox1_SelectedIndexChanged;
             // 
             // UpdateButton
             // 
@@ -192,6 +193,16 @@
             tabPage2.TabIndex = 1;
             tabPage2.Text = "Settings";
             // 
+            // button1
+            // 
+            button1.Location = new Point(33, 298);
+            button1.Name = "button1";
+            button1.Size = new Size(112, 34);
+            button1.TabIndex = 6;
+            button1.Text = "Save";
+            button1.UseVisualStyleBackColor = true;
+            button1.Click += button1_Click;
+            // 
             // BrowseDevHDD0
             // 
             BrowseDevHDD0.Location = new Point(436, 205);
@@ -257,16 +268,6 @@
             // openFileDialog1
             // 
             openFileDialog1.FileName = "openFileDialog1";
-            // 
-            // button1
-            // 
-            button1.Location = new Point(33, 298);
-            button1.Name = "button1";
-            button1.Size = new Size(112, 34);
-            button1.TabIndex = 6;
-            button1.Text = "Save";
-            button1.UseVisualStyleBackColor = true;
-            button1.Click += button1_Click;
             // 
             // Form1
             // 
