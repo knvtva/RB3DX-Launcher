@@ -20,7 +20,6 @@ namespace RB3DX_Launcher
         public Updater()
         {
             InitializeComponent();
-            
             if (System.IO.File.Exists("RB3DX-PS3.zip"))
             {
                 System.IO.File.Delete("RB3DX-PS3.zip");
@@ -29,49 +28,80 @@ namespace RB3DX_Launcher
             {
                 System.IO.Directory.Delete("RB3DX-PS3", true);
             }
-            using (WebClient Client = new WebClient())
+
+
+            if (System.IO.File.Exists("RB3DX.config"))
             {
-                //Client.DownloadProgressChanged;
-                // read config file and populate rpcs3path and devhdd0 path
                 string configPath = "RB3DX.config";
                 string[] configLines = System.IO.File.ReadAllLines(configPath);
-                string branch = configLines[2];
-                Client.DownloadProgressChanged += new DownloadProgressChangedEventHandler(client_DownloadProgressChanged);
-                Client.DownloadFileCompleted += new AsyncCompletedEventHandler(client_DownloadFileCompleted);
-                Client.DownloadFileAsync(new System.Uri("https://nightly.link/hmxmilohax/rock-band-3-deluxe/workflows/build/"+ branch + "/RB3DX-PS3.zip"), "RB3DX-PS3.zip"
-                );
-            }
-            void client_DownloadProgressChanged(object sender, DownloadProgressChangedEventArgs e)
-            {
-                this.BeginInvoke((MethodInvoker)delegate
+                string branch = "main";
+                if (configLines.Length > 2)
                 {
-                    
-                    double bytesIn = double.Parse(e.BytesReceived.ToString());
-                    double totalBytes = double.Parse(e.TotalBytesToReceive.ToString());
-                    //double percentage = bytesIn / totalBytes * 100;
-                    label2.Text = "Downloaded " + e.BytesReceived / 1000 / 1000 + "MB";
-                    // progressBar1.Value = int.Parse(Math.Truncate(percentage).ToString());
-                });
+                    branch = configLines[2];
+                }
+                using (WebClient Client = new WebClient())
+                {
+                    Client.DownloadProgressChanged += new DownloadProgressChangedEventHandler(client_DownloadProgressChanged);
+                    Client.DownloadFileCompleted += new AsyncCompletedEventHandler(client_DownloadFileCompleted);
+                    try
+                    {
+                        MessageBox.Show("https://nightly.link/hmxmilohax/rock-band-3-deluxe/workflows/build/" + branch + "/RB3DX-PS3.zip");
+                        Client.DownloadFileAsync(new System.Uri("https://nightly.link/hmxmilohax/rock-band-3-deluxe/workflows/build/" + branch + "/RB3DX-PS3.zip"), "RB3DX-PS3.zip");
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Error: " + ex.Message);
+                        // Handle the exception as needed.
+                    }
+                }
+
             }
-            void client_DownloadFileCompleted(object sender, AsyncCompletedEventArgs e)
+
+        }
+        void client_DownloadProgressChanged(object sender, DownloadProgressChangedEventArgs e)
+        {
+            this.BeginInvoke((MethodInvoker)delegate
             {
-                this.BeginInvoke((MethodInvoker)delegate {
+
+                double bytesIn = double.Parse(e.BytesReceived.ToString());
+                double totalBytes = double.Parse(e.TotalBytesToReceive.ToString());
+                //double percentage = bytesIn / totalBytes * 100;
+                label2.Text = "Downloaded " + e.BytesReceived / 1000 / 1000 + "MB";
+                // progressBar1.Value = int.Parse(Math.Truncate(percentage).ToString());
+            });
+        }
+        void client_DownloadFileCompleted(object sender, AsyncCompletedEventArgs e)
+        {
+            this.BeginInvoke((MethodInvoker)delegate
+            {
+                if (e.Error != null)
+                {
+                    MessageBox.Show("Download Error: " + e.Error.Message);
+                    // Handle the download error here.
+                }
                 label2.Text = "Download Completed! Extracting...";
                 ZipFile.ExtractToDirectory("RB3DX-PS3.zip", "RB3DX-PS3");
+                // read all files ending in .pkg and install them with rpcs3
+                //string pkgDirectory = Path.GetFullPath("RB3DX-PS3");
+                string[] pkgFiles = Directory.GetFiles("RB3DX-PS3", "*.pkg");
+                
                 label2.Text = "Extracted! Installing with RPCS3...";
-                    // read config file and populate rpcs3path
-                    string configPath = "RB3DX.config";
-                    string[] configLines = System.IO.File.ReadAllLines(configPath);
-                    string rpcs3path = configLines[0];
+                // read config file and populate rpcs3path
+                string configPath = "RB3DX.config";
+                string[] configLines = System.IO.File.ReadAllLines(configPath);
+                string rpcs3path = configLines[0];
+                foreach (string pkgFile in pkgFiles)
+                {
+                    string pkgFilePath = Path.GetFullPath(pkgFile); // Combine directory path and file name
                     Process.Start(new ProcessStartInfo(rpcs3path)
                     {
-                        Arguments = "",
+                        Arguments = "--installpkg " + pkgFilePath, // Enclose the file path in double quotes
                         UseShellExecute = true
                     });
+                }
 
 
-                });
-            }
+            });
         }
     }
 }

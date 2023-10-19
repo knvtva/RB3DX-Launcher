@@ -96,7 +96,7 @@
             // comboBox1
             // 
             comboBox1.FormattingEnabled = true;
-            comboBox1.Items.AddRange(new object[] { "main", "dev" });
+            comboBox1.Items.AddRange(new object[] { "main", "develop" });
             comboBox1.Location = new Point(604, 275);
             comboBox1.Margin = new Padding(2);
             comboBox1.Name = "comboBox1";
