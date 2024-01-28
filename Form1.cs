@@ -5,6 +5,8 @@ namespace RB3DX_Launcher
 {
     public partial class Form1 : Form
     {
+
+        bool isGameStarted = false;
         public Form1()
         {
             InitializeComponent();
@@ -17,6 +19,7 @@ namespace RB3DX_Launcher
                 devhdd0.Text = configLines[1];
                 comboBox1.Text = configLines[2];
             }
+            Logger.LogDebug(isGameStarted);
         }
         private void dxLogo_Click(object sender, EventArgs e)
         {
@@ -82,6 +85,8 @@ namespace RB3DX_Launcher
                     UseShellExecute = true
                 });
                 Logger.LogInfo("Found the EBOOT.bin, Booting the game!");
+                isGameStarted = true;
+                Logger.LogDebug(isGameStarted);
             }
             catch
             {

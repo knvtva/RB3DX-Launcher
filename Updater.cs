@@ -98,9 +98,8 @@ namespace RB3DX_Launcher
                         Arguments = "--installpkg " + pkgFilePath, // Enclose the file path in double quotes
                         UseShellExecute = true
                     });
+                    Logger.LogDebug("--installpkg " + pkgFilePath);
                 }
-
-
             });
         }
     }

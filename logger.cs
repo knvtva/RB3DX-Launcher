@@ -5,15 +5,21 @@ class Logger
 {
     private static string logFilePath = "RB3DX.log";
 
-    public static void LogInfo(string message)
+    public static void LogInfo(object message)
     {
         string formattedMessage = $"[RB3DX-Launcher:INFO] {message}";
         Log(formattedMessage);
     }
+    
 
-    public static void LogError(string message)
+    public static void LogError(object message)
     {
         string formattedMessage = $"[RB3DX-Launcher:ERROR] {message}";
+        Log(formattedMessage);
+    }
+    public static void LogDebug(object message)
+    {
+        string formattedMessage = $"[RB3DX-Launcher:DEBUG] {message}";
         Log(formattedMessage);
     }
 

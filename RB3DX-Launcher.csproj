@@ -30,4 +30,9 @@
     </EmbeddedResource>
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="DiscordRichPresence" Version="1.2.1.24" />
+    <PackageReference Include="NetDiscordRpc" Version="1.0.2" />
+  </ItemGroup>
+
 </Project>
