@@ -1,8 +1,10 @@
 using System;
+using System.Diagnostics;
 using System.IO;
 
 class Logger
 {
+    public static bool Debug = true;
     private static string logFilePath = "RB3DX.log";
 
     public static void LogInfo(object message)
@@ -19,8 +21,11 @@ class Logger
     }
     public static void LogDebug(object message)
     {
-        string formattedMessage = $"[RB3DX-Launcher:DEBUG] {message}";
-        Log(formattedMessage);
+        if (Debug == true)
+        {
+            string formattedMessage = $"[RB3DX-Launcher:DEBUG] {message}";
+            Log(formattedMessage);
+        }
     }
 
     private static void Log(string message)

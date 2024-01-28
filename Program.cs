@@ -7,11 +7,16 @@ namespace RB3DX_Launcher
         [STAThread]
         static void Main()
         {
-            DiscordRPC.DiscordRPC.startRPC();
-        
-            Logger.LogInfo("Checking for the latest update...");
-            ApplicationConfiguration.Initialize();
-            Application.Run(new Form1());
+            try {
+                DiscordRPC.DiscordRPC.StartRPC();
+                Logger.LogInfo("Checking for the latest update...");
+                ApplicationConfiguration.Initialize();
+                Application.Run(new Form1());
+            }
+            catch (Exception) 
+            {
+                // Pass, Allows the launcher to boot
+            }
 
             // (TODO:Ash) Finish off writing the launcher version checker + Deluxe updater.
         }

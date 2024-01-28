@@ -6,7 +6,8 @@ namespace RB3DX_Launcher
     public partial class Form1 : Form
     {
 
-        bool isGameStarted = false;
+        public static bool isGameStarted = false;
+
         public Form1()
         {
             InitializeComponent();
