@@ -125,5 +125,11 @@ namespace RB3DX_Launcher
             string[] configLines = { rpcs3ExecutablePath, hddPath, branch };
             File.WriteAllLines(configPath, configLines);
         }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            string acePath = devhdd0.Text + "/game/BLUS30463/USRDIR/ace.dta";
+            System.Diagnostics.Process.Start("notepad.exe", acePath);
+        }
     }
 }

@@ -45,7 +45,7 @@ namespace RB3DX_Launcher
                     Client.DownloadFileCompleted += new AsyncCompletedEventHandler(client_DownloadFileCompleted);
                     try
                     {
-                        MessageBox.Show("https://nightly.link/hmxmilohax/rock-band-3-deluxe/workflows/build/" + branch + "/RB3DX-PS3.zip");
+                       // debug MessageBox.Show("https://nightly.link/hmxmilohax/rock-band-3-deluxe/workflows/build/" + branch + "/RB3DX-PS3.zip");
                         Client.DownloadFileAsync(new System.Uri("https://nightly.link/hmxmilohax/rock-band-3-deluxe/workflows/build/" + branch + "/RB3DX-PS3.zip"), "RB3DX-PS3.zip");
                     }
                     catch (Exception ex)
@@ -100,6 +100,10 @@ namespace RB3DX_Launcher
                     });
                     Logger.LogDebug("--installpkg " + pkgFilePath);
                 }
+                Task.Delay(1000);
+                label2.Text = "Passed to RPCS3🎊";
+                Task.Delay(1000);
+                this.Close();
             });
         }
     }
