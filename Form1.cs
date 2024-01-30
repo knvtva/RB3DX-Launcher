@@ -1,12 +1,12 @@
 using System.Diagnostics;
 using System.Windows.Forms.Design;
+using Microsoft.VisualBasic.Logging;
 
 namespace RB3DX_Launcher
 {
     public partial class Form1 : Form
     {
 
-        public static bool isGameStarted = false;
 
         public Form1()
         {
@@ -20,8 +20,10 @@ namespace RB3DX_Launcher
                 devhdd0.Text = configLines[1];
                 comboBox1.Text = configLines[2];
             }
-            Logger.LogDebug(isGameStarted);
+
+            ProcessWatcher.Start();
         }
+
         private void dxLogo_Click(object sender, EventArgs e)
         {
             Process.Start(new ProcessStartInfo("https://rb3dx.neocities.org/") { UseShellExecute = true });
@@ -86,8 +88,6 @@ namespace RB3DX_Launcher
                     UseShellExecute = true
                 });
                 Logger.LogInfo("Found the EBOOT.bin, Booting the game!");
-                isGameStarted = true;
-                Logger.LogDebug(isGameStarted);
             }
             catch
             {
