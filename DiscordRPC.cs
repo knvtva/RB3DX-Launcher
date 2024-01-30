@@ -30,11 +30,17 @@ namespace DiscordRPC
                 Logger.LogInfo($"Connected to discord with user {msg.User.Username}");
             };
 
-            string configPath = "RB3DX.config";
-            string[] configLines = System.IO.File.ReadAllLines(configPath);
-            string devHDD0 = configLines[1];
+            try {
+                string configPath = "RB3DX.config";
+                string[] configLines = System.IO.File.ReadAllLines(configPath);
+                string devHDD0 = configLines[1];
 
-            JSON_FILE = devHDD0 + "/game/BLUS30463/USRDIR/";
+                JSON_FILE = devHDD0 + "/game/BLUS30463/USRDIR/";
+            }
+            catch (Exception e)
+            {
+                Logger.LogError(e.Message);
+            }
 
             Logger.LogDebug(JSON_FILE);
 
@@ -45,14 +51,18 @@ namespace DiscordRPC
 
         private static void InitializeWatcher()
         {
-        
-
-            watcher = new FileSystemWatcher();
-            watcher.Path = (string)JSON_FILE;
-            watcher.Filter = "discordrp.json";
-            watcher.NotifyFilter = NotifyFilters.LastWrite;
-            watcher.Changed += OnFileChanged;
-            watcher.EnableRaisingEvents = true;
+            try {
+                watcher = new FileSystemWatcher();
+                watcher.Path = (string)JSON_FILE;
+                watcher.Filter = "discordrp.json";
+                watcher.NotifyFilter = NotifyFilters.LastWrite;
+                watcher.Changed += OnFileChanged;
+                watcher.EnableRaisingEvents = true;
+            }
+            catch (Exception e)
+            {
+                Logger.LogError(e.Message);
+            }
         }
 
         private static void OnFileChanged(object source, FileSystemEventArgs e)
