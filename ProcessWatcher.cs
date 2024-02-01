@@ -5,6 +5,7 @@ using System.Timers;
 class ProcessWatcher
 {
     public static string processName = "rpcs3";
+    public static string processNameAlt = "rpcs3.exe";
     public static bool isGameRunning = false;
 
     public static void Start()
@@ -18,7 +19,7 @@ class ProcessWatcher
 
     static void CheckProcessState()
     {
-        bool currentProcessState = IsProcessRunning(processName);
+        bool currentProcessState = IsProcessRunning(processName) || IsProcessRunning(processNameAlt);
 
         if (currentProcessState == true) 
         {
