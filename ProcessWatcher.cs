@@ -27,6 +27,15 @@ class ProcessWatcher
         else
         {
             isGameRunning = false;
+            try {
+                File.WriteAllText(DiscordRPC.DiscordRPC.JSON_FILE, string.Empty);
+            }
+            catch
+            {
+                ;
+            }
+
+
         }
     }
 

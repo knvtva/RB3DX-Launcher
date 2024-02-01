@@ -15,10 +15,8 @@ namespace RB3DX_Launcher
             }
             catch (Exception) 
             {
-                // Pass, Allows the launcher to boot
+                ; // I had a logging msg here, but it spams the log so I removed it :) (Ash)
             }
-
-            // (TODO:Ash) Finish off writing the launcher version checker + Deluxe updater.
         }
     }
 }

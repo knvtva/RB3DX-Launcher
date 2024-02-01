@@ -51,6 +51,7 @@ namespace RB3DX_Launcher
                     catch (Exception ex)
                     {
                         MessageBox.Show("Error: " + ex.Message);
+                        Logger.LogError(ex.Message);
                         // Handle the exception as needed.
                     }
                 }
