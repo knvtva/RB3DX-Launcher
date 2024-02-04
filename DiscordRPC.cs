@@ -151,6 +151,7 @@ namespace DiscordRPC
             {
                 if (ProcessWatcher.isGameRunning == true)
                 {
+                    Logger.LogDebug("RPCS3 is running! (DiscordRPC)");
                     string filePath = JSON_FILE;
                     string jsonData = File.ReadAllText(filePath);
 
@@ -258,8 +259,6 @@ namespace DiscordRPC
                         // Don't do anything let is pass
                     }
 
-                    Logger.LogDebug("Did we crash after this? x4");
-
                     client.SetPresence(new RichPresence()
                     {
                         Details = $"{active_instrument_text} {gameMode}",
@@ -280,6 +279,7 @@ namespace DiscordRPC
                 }
                 else
                 {
+                    Logger.LogDebug("RPCS3 is not running! (DiscordRPC)");
                     txt_State = "In Launcher";
                     client.SetPresence(new RichPresence()
                     {
