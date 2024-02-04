@@ -130,7 +130,7 @@ namespace DiscordRPC
             }
             catch (Exception e)
             {
-                Logger.LogError(e.Message);
+                ; // Logger.LogError(e.Message); Causes spam (annoyingly)
             }
         }
 
@@ -147,139 +147,167 @@ namespace DiscordRPC
 
         public static void updateRPC()
         {
-            try   
+            try
             {
                 if (ProcessWatcher.isGameRunning == true)
                 {
-                    Logger.LogDebug("RPCS3 is running! (DiscordRPC)");
-                    string filePath = JSON_FILE;
-                    string jsonData = File.ReadAllText(filePath);
-
-                    string parsedInput = jsonData.Replace("\\q", "\"");
-                    parsedInput = parsedInput.Replace("'", "'");
-                    parsedInput = parsedInput.Substring(1, parsedInput.Length - 4);
-
-                    JsonDocument doc = JsonDocument.Parse(parsedInput);
-
-                    JsonElement root = doc.RootElement;
-
-                    Loaded_Song = "No song loaded";
-                    SelectedInstruments = "";
-                    active_instrument_text = "";
-                    active_instrument_count = 0;
-                    instrument_name = "";
-                    instrument_small_text_name = "";
-                    instrument_difficulty = "";
-                    active_instrument_small_text = "";
-                    active_instrument_small_image = "";
-
-                    try {
-                        gameMode = root.GetProperty("Game mode").GetString();
-                        ScreenCategory = root.GetProperty("Screen Category").GetString();
-                        CurrentScreen = root.GetProperty("Current Screen").GetString();
-                        isOnline = root.GetProperty("Online").GetString() ?? "Not Found";
-                        Loaded_Song = root.GetProperty("Loaded Song").GetString();
-                        SelectedInstruments = root.GetProperty("SelectedInstruments");
-                    }
-                    catch (Exception e)
+                    bool fileAccessed = false;
+                    int retries = 3;
+                    while (!fileAccessed && retries > 0)
                     {
-                        //Logger.LogError(e.Message); This will spam log. So It's best off if we leave it out for now
-                    }
-
-                    if (gameModeMapping.ContainsKey(gameMode))
-                    {
-                        gameMode = gameModeMapping[gameMode];
-                    }
-
-                    if (SelectedInstruments is JsonElement instrumentsArray)
-                    {   
-                        AllInstruments = instrumentsArray;
-                        active_instrument_count = instrumentsArray.EnumerateArray().Count(instrument => instrument.GetProperty("active").GetBoolean());
-
-                        active_instrument_text = "";
-                        if (active_instrument_count > 1)
+                        try
                         {
-                            active_instrument_text = $"{active_instrument_count} player band";
-                        }
-                        else if (active_instrument_count == 1)
-                        {
-                            active_instrument_text = "1 player band";
-                        }
-                    }
+                            string filePath = JSON_FILE;
+                            string jsonData = File.ReadAllText(filePath);
 
-                    try {
-                        if (active_instrument_count > 1)
-                        {
-                            active_instrument_text = $"{active_instrument_count} Player";
-                            active_instrument_small_image = "default_small_image_name";
-                        }
-                        else
-                        {
-                            foreach (var instrument in AllInstruments.EnumerateArray())
+                            string parsedInput = jsonData.Replace("\\q", "\"");
+                            parsedInput = parsedInput.Replace("'", "'");
+                            parsedInput = parsedInput.Substring(1, parsedInput.Length - 4);
+
+                            JsonDocument doc = JsonDocument.Parse(parsedInput);
+
+                            JsonElement root = doc.RootElement;
+
+                            Loaded_Song = "No song loaded";
+                            SelectedInstruments = "";
+                            active_instrument_text = "";
+                            active_instrument_count = 0;
+                            instrument_name = "";
+                            instrument_small_text_name = "";
+                            instrument_difficulty = "";
+                            active_instrument_small_text = "";
+                            active_instrument_small_image = "";
+
+                            try
                             {
-                                if (instrument.GetProperty("active").GetBoolean() && Loaded_Song != "No song loaded")
+                                gameMode = root.GetProperty("Game mode").GetString();
+                                ScreenCategory = root.GetProperty("Screen Category").GetString();
+                                CurrentScreen = root.GetProperty("Current Screen").GetString();
+                                isOnline = root.GetProperty("Online").GetString() ?? "Not Found";
+                                Loaded_Song = root.GetProperty("Loaded Song").GetString();
+                                SelectedInstruments = root.GetProperty("SelectedInstruments");
+                            }
+                            catch (Exception e)
+                            {
+                                ;//Logger.LogError(e.Message); This will spam log. So It's best off if we leave it out for now
+                            }
+
+                            if (gameModeMapping.ContainsKey(gameMode))
+                            {
+                                gameMode = gameModeMapping[gameMode];
+                            }
+
+                            if (SelectedInstruments is JsonElement instrumentsArray)
+                            {
+                                AllInstruments = instrumentsArray;
+                                active_instrument_count = instrumentsArray.EnumerateArray().Count(instrument => instrument.GetProperty("active").GetBoolean());
+
+                                active_instrument_text = "";
+                                if (active_instrument_count > 1)
                                 {
-                                    instrument_name = instrument.GetProperty("instrument").GetString();
-                                    instrument_small_text_name = instrument.GetProperty("instrument").GetString();
-                                    instrument_difficulty = instrument.GetProperty("difficulty").GetString();
-
-                                    instrument_name = SimplifyInstrumentName[instrument_name];
-                                    instrument_difficulty = CleanDifficulty[instrument_difficulty];
-
-                                    active_instrument_text = "Solo";
-                                    active_instrument_small_text = $"{instrument_name}, {instrument_difficulty}";
-                                    active_instrument_small_image = MapInstrumentToSmallImage[instrument_small_text_name];
-
-                                    Logger.LogDebug("=============Song Information===============");
-                                    Logger.LogDebug("Loaded Song: " + Loaded_Song);
-                                    Logger.LogDebug("Active Instrument: " + active_instrument_text);
-                                    Logger.LogDebug("Active Instrument Count: " + active_instrument_count);
-                                    Logger.LogDebug("Instrument Name: " + instrument_name);
-                                    Logger.LogDebug("Instrument Small Text Name: " + instrument_small_text_name);
-                                    Logger.LogDebug("Instrument Difficulty: " + instrument_difficulty);
-                                    Logger.LogDebug("Active Instrument Small Text: " + active_instrument_small_text);
-                                    Logger.LogDebug("Active Instrument Small Image: " + active_instrument_small_image);
-                                    Logger.LogDebug("============================================");
-                                    break;
+                                    active_instrument_text = $"{active_instrument_count} player band";
+                                }
+                                else if (active_instrument_count == 1)
+                                {
+                                    active_instrument_text = "1 player band";
                                 }
                             }
-                            if (string.IsNullOrEmpty(active_instrument_text))
+
+                            try
                             {
-                                active_instrument_text = "";
+                                if (active_instrument_count > 1)
+                                {
+                                    active_instrument_text = $"{active_instrument_count} Player";
+                                    active_instrument_small_image = "default_small_image_name";
+                                }
+                                else
+                                {
+                                    foreach (var instrument in AllInstruments.EnumerateArray())
+                                    {
+                                        if (instrument.GetProperty("active").GetBoolean() && Loaded_Song != "No song loaded")
+                                        {
+                                            instrument_name = instrument.GetProperty("instrument").GetString();
+                                            instrument_small_text_name = instrument.GetProperty("instrument").GetString();
+                                            instrument_difficulty = instrument.GetProperty("difficulty").GetString();
+
+                                            instrument_name = SimplifyInstrumentName[instrument_name];
+                                            instrument_difficulty = CleanDifficulty[instrument_difficulty];
+
+                                            active_instrument_text = "Solo";
+                                            active_instrument_small_text = $"{instrument_name}, {instrument_difficulty}";
+                                            active_instrument_small_image = MapInstrumentToSmallImage[instrument_small_text_name];
+
+                                            Logger.LogDebug("=============Song Information===============");
+                                            Logger.LogDebug("Loaded Song: " + Loaded_Song);
+                                            Logger.LogDebug("Active Instrument: " + active_instrument_text);
+                                            Logger.LogDebug("Active Instrument Count: " + active_instrument_count);
+                                            Logger.LogDebug("Instrument Name: " + instrument_name);
+                                            Logger.LogDebug("Instrument Small Text Name: " + instrument_small_text_name);
+                                            Logger.LogDebug("Instrument Difficulty: " + instrument_difficulty);
+                                            Logger.LogDebug("Active Instrument Small Text: " + active_instrument_small_text);
+                                            Logger.LogDebug("Active Instrument Small Image: " + active_instrument_small_image);
+                                            Logger.LogDebug("============================================");
+                                            break;
+                                        }
+                                    }
+                                    if (string.IsNullOrEmpty(active_instrument_text))
+                                    {
+                                        active_instrument_text = "";
+                                    }
+                                }
+
+                                if (isOnline == "true")
+                                {
+                                    gameMode = "Online " + gameMode;
+                                }
                             }
-                        }
+                            catch {;}
+                        
+                            try
+                            {
+                                client.SetPresence(new RichPresence()
+                                {
+                                    Details = $"{active_instrument_text} {gameMode}",
+                                    State = $"{Loaded_Song}",
+                                    Buttons = new Button[]
+                                    {
+                                        new Button() { Label = "🖥️ GitHub", Url = "https://github.com/hmxmilohax/rock-band-3-deluxe"},
+                                        new Button() { Label = "⬇️ Download", Url = "https://rb3dx.neocities.org" }
+                                    },
+                                    Assets = new Assets()
+                                    {
+                                        LargeImageKey = "banner",
+                                        LargeImageText = "Rock Band 3 Deluxe RPCS3",
+                                        SmallImageKey = active_instrument_small_image,
+                                        SmallImageText = active_instrument_small_text ?? null,
+                                    }
+                                });
+                            }
+                            catch (Exception e)
+                            {
+                                Logger.LogError(e.Message);
+                            }
 
-                        if (isOnline == "true")
+                            // Set fileAccessed to true if file access is successful
+                            fileAccessed = true;
+                        }
+                        catch (IOException ex)
                         {
-                            gameMode = "Online " + gameMode;
+                            Logger.LogError($"Error accessing file: {ex.Message}");
+                            retries--;
+                            Thread.Sleep(1000); // Wait for 1 second before retrying
                         }
                     }
-                    catch
-                    {
-                        // Don't do anything let is pass
-                    }
 
-                    client.SetPresence(new RichPresence()
+                    // If file was not accessed after retries, log an error
+                    if (!fileAccessed)
                     {
-                        Details = $"{active_instrument_text} {gameMode}",
-                        State = $"{Loaded_Song}",
-                        Buttons = new Button[]
-                        {
-                            new Button() { Label = "🖥️ GitHub", Url = "https://github.com/hmxmilohax/rock-band-3-deluxe"},
-                            new Button() { Label = "⬇️ Download", Url = "https://rb3dx.neocities.org" }
-                        },
-                        Assets = new Assets()
-                        {
-                            LargeImageKey = "banner",
-                            LargeImageText = "Rock Band 3 Deluxe RPCS3",
-                            SmallImageKey = active_instrument_small_image,
-                            SmallImageText = active_instrument_small_text ?? null,
-                        }
-                    });
+                        Logger.LogError("Failed to access file after retries.");
+                        return;
+                    }
                 }
                 else
                 {
-                    Logger.LogDebug("RPCS3 is not running! (DiscordRPC)");
                     txt_State = "In Launcher";
                     client.SetPresence(new RichPresence()
                     {
@@ -297,13 +325,10 @@ namespace DiscordRPC
                     });
                 }
             }
-              catch (Exception e)
+            catch (Exception e)
             {
                 Logger.LogError(e.Message);
             }
-
-
-            //client.Initialize();
         }
     }
 }
