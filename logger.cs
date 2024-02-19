@@ -5,7 +5,7 @@ using System.IO;
 class Logger
 {
     public static bool Debug = true;
-    private static string logFilePath = "RB3DX.log";
+    public static string logFilePath = "RB3DX.log";
 
     public static void LogInfo(object message)
     {
