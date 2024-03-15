@@ -130,7 +130,7 @@ namespace DiscordRPC
             }
             catch (Exception e)
             {
-                ; // Logger.LogError(e.Message); Causes spam (annoyingly)
+                ;
             }
         }
 
@@ -141,7 +141,7 @@ namespace DiscordRPC
             }
             catch (Exception) 
             {
-                ; // I had a logging msg here, but it spams the log so I removed it :) (Ash)
+                ;
             }
         }
 
@@ -236,17 +236,6 @@ namespace DiscordRPC
                                             active_instrument_text = "Solo";
                                             active_instrument_small_text = $"{instrument_name}, {instrument_difficulty}";
                                             active_instrument_small_image = MapInstrumentToSmallImage[instrument_small_text_name];
-
-                                            Logger.LogDebug("=============Song Information===============");
-                                            Logger.LogDebug("Loaded Song: " + Loaded_Song);
-                                            Logger.LogDebug("Active Instrument: " + active_instrument_text);
-                                            Logger.LogDebug("Active Instrument Count: " + active_instrument_count);
-                                            Logger.LogDebug("Instrument Name: " + instrument_name);
-                                            Logger.LogDebug("Instrument Small Text Name: " + instrument_small_text_name);
-                                            Logger.LogDebug("Instrument Difficulty: " + instrument_difficulty);
-                                            Logger.LogDebug("Active Instrument Small Text: " + active_instrument_small_text);
-                                            Logger.LogDebug("Active Instrument Small Image: " + active_instrument_small_image);
-                                            Logger.LogDebug("============================================");
                                             break;
                                         }
                                     }
